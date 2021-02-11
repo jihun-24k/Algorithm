@@ -1,3 +1,5 @@
+# 백준 1781번 컵라면
+
 import sys
 import heapq
 input = sys.stdin.readline
