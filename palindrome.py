@@ -17,6 +17,7 @@ dp= [[0 for _ in range(N+1)] for _ in range(N+1)]
 # 펠린드롬 길이가 1과 2일 때
 dp[0][0] = 1
 for i in range(1,N+1):
+    # 길이가 1이면 무조건 팰린드롬
     dp[i][i] = 1
     # 만약 이전 값과 같다면 펠린드롬
     if array[i] == array[i-1]:
