@@ -3,34 +3,42 @@ import heapq
 input = sys.stdin.readline
 
 N, K = map(int, input().split())
+S = list(map(int,input().split()))
 
-array = list(map(int,input().split()))
+# 인덱스를 101로 초기화
+elec = [[101] for _ in range(K+1)]
+for i in range(K-1, -1 , -1):
+    elec[S[i]].append(i+1)
 
+# 전자제품 꽂기
 plug_count = 0
-multi_tap = []
+hole = [-1] * (N+1)
+sinkHole = 0 # 빈 구멍 인덱스
+thisHole = 0
+delHole = [] # [-대기표, 구멍 번호]
+
 for i in range(K):
-    # 현재 코드의 다음 코드의 순서를 계산
-    # 만일 없다면 100보다 큰 101값을 넣어줌
-    try:
-        next_idx = array[i+1:].index(array[i])
-    except:
-        next_idx = 101
-    
-    # 멀티탭이 다 안찼다면
-    if len(multi_tap) < N:
-        heapq.heappush(multi_tap,(-next_idx, array[i]))
-        continue
-    # 멀티탭 안에 이미 꽂혀있다면
-    # 같은 코드가 있다면
-    if array[i] == multi_tap[-1][1]:
-        del multi_tap[-1]
-        heapq.heappush(multi_tap,(-next_idx, array[i]))
-        continue
-    if array[i] == multi_tap[-2][1]:
-        del multi_tap[-2]
-        heapq.heappush(multi_tap,(-next_idx, array[i]))
-        continue
-    heapq.heappop(multi_tap)
-    heapq.heappush(multi_tap,(-next_idx, array[i]))
-    plug_count += 1
+    thisElec = elec[S[i]].pop() #대기표 접수
+    nextElec = elec[S[i]][-1]   #대기표 확인
+
+    if S[i] not in hole:
+        # 빈 구멍 있는지 확인
+        if sinkHole < N:
+            hole[sinkHole] = S[i]
+            thisHole = sinkHole
+            sinkHole += 1
+            
+        # 뽑기
+        else:
+            plug_count += 1
+            trash, thisHole = heapq.heappop(delHole)
+            hole[thisHole] = S[i]
+    # 꽂혀있으면 어디 꽂혔는지
+    else:
+        for j in range(N):
+            if hole[j] == S[i]:
+                thisHole = j
+
+    heapq.heappush(delHole, [-nextElec, thisHole])
+
 print(plug_count)
