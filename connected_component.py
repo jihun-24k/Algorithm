@@ -1,3 +1,5 @@
+# 백준 11724번 연결요소의 개수
+
 import sys
 from collections import deque
 input = sys.stdin.readline
