@@ -5,18 +5,15 @@ input = sys.stdin.readline
 
 K = int(input())
 
-# 시작점을 위한 리스트
-where_start = deque()
 # 테스트 케이스들 입력
 test_case = []
 for _ in range(K):
+    # v는 정점, e는 간선의 개수
     v, e = map(int,input().split())
     graph = [[]for _ in range(v+1)]
     for i in range(e):
         # 그래프에 넣기
         start, end = map(int,input().split())
-        if i == 0:
-            where_start.append(start)
         graph[start].append(end)
         graph[end].append(start)
     # 각 그래프들의 방문 리스트 만들기
@@ -24,37 +21,44 @@ for _ in range(K):
 
 # 그래프 마다 검사
 for graph in test_case:
-    # 방문 리스트
-    visited = [False]*len(graph)
-
-    # 마지막 정점부터 빨강으로 칠하면서 시작함
+    # 그래프마다의 방문 리스트 초기화
+    visited = [0 for _ in range(len(graph))]
     temp = False
-    first = where_start.popleft()
-    visited[first] = "red"
-    queue = deque([first])
 
-    while queue:
-        v = queue.popleft()
-        before = visited[v]
+    for n in range(1,len(graph)):
+        # 예외 처리
+        if visited[n] > 0:
+            continue
+        if temp:
+            break  
 
-        for i in graph[v]:
-            if not visited[i]:
-                # 이전 색이 빨강이면 파랑을 칠해줌
-                if before == "red":
-                    queue.append(i)
-                    visited[i] = "blue"
-                    continue
-                # 이전 색이 파랑이면 빨강을 칠해줌
-                if before == "blue":
-                    queue.append(i)
-                    visited[i] = "red"
-                    continue
-            else:
-                if visited[i] == before:
-                    temp = True
-                if visited[i] != before:
-                    continue
-    if temp == True:
+        # 한 정점부터 빨강으로 칠하면서 시작함
+        visited[n] = 1
+        queue = deque([n])
+
+        while queue:
+            v = queue.popleft()
+            before = visited[v]
+
+            for i in graph[v]:
+                # 방문한 적이 없다면 색을 칠한다.
+                if visited[i] == 0:
+                    # 이전 색이 빨강이면 파랑을 칠해줌
+                    if before == 1:
+                        queue.append(i)
+                        visited[i] = 2
+                        continue
+                    # 이전 색이 파랑이면 빨강을 칠해줌
+                    if before == 2:
+                        queue.append(i)
+                        visited[i] = 1
+                        continue
+                else:
+                    if visited[i] == before:
+                        temp = True
+                    if visited[i] != before:
+                        continue
+    if temp:
         print("NO")
-    elif temp == False:
+    else:
         print("YES")
