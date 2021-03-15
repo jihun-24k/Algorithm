@@ -1,33 +1,25 @@
 # 백준 2263번 트리의 순회(골드)
 import sys
-from collections import deque
-input = sys.stdin.readline
+sys.setrecursionlimit(10**9)
 
 n = int(input())
 in_order = list(map(int, input().split()))
 post_order = list(map(int, input().split()))
 
-# 방문 확인
-in_visited = [False]*len(in_order)
-post_visited = [False]*len(post_order)
+pos = [0]*(n+1)
+for i in range(n): 
+    pos[in_order[i]] = i
 
-# 후위 순회의 제일 마지막 노드는 루트 노드다
-queue = deque()
-queue.append(post_order[-1])
+def pre_order(i_start, i_end, p_start, p_end):
 
-while queue:
-    root = queue.popleft()
+    if p_start <= p_end:
+        root = post_order[p_end] 
+        print(root, end = ' ')
 
-    i_idx = in_order.index(root)
-    p_idx = post_order.index(root)
+        left = pos[root] - i_start
+        right = i_end - pos[root]
 
-    in_visited[i_idx] = True
-    post_visited[p_idx] = True
-    print(root, end=' ')
+        pre_order(i_start, i_end + left -1 , p_start, p_end + left -1)
+        pre_order(i_end-right+1, i_end, p_end-right, p_end-1)
 
-    # 왼쪽 서브 트리
-    if i_idx != 0 and in_visited[i_idx-1] != True:
-        queue.append(in_order[i_idx-1])
-    # 오른쪽 서브 트리
-    if p_idx !=0 and post_visited[p_idx-1] != True:
-        queue.append(post_order[p_idx-1])
+pre_order(0,n-1,0,n-1)
