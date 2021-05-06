@@ -20,5 +20,6 @@ def dfs(row, col):
             for k in range(1, N + 1):
                 col[row + 1] = k
                 dfs(row + 1, col)
+                
 dfs(0, col)
 print(result)
