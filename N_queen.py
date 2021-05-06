@@ -14,17 +14,6 @@ def check_queen(col, row):
 
 def dfs(row):
     global result
-<<<<<<< HEAD
-    if check_queen(row, col):
-        if row == N:
-            result += 1
-        else:
-            for k in range(1, N + 1):
-                col[row + 1] = k
-                dfs(row + 1, col)
-                
-dfs(0, col)
-=======
     if row == N:
         result += 1
     else:
@@ -33,5 +22,4 @@ dfs(0, col)
             if not (check_queen(col, row)):
                 dfs(row + 1)
 dfs(0)
->>>>>>> 14b3cfc38d8d918cf45992a49c5fd0008acb3204
 print(result)
