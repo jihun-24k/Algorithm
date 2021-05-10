@@ -1,26 +1,28 @@
 # 백준 5052번 전화번호 목록
 import sys
-input = sys.stdin.readline
 
+input = sys.stdin.readline
 T = int(input())
 
 result = []
 for _ in range(T):
-    N = int(input())
-    case = []
-    is_ok = True
-
-    for _ in range(N):
-        case.append(int(input().strip()))
-    case.sort()
-
-    for i in range(len(case)-1):
-        if str(case[i]) in str(case[i+1]):
-            result.append('NO')
-            is_ok = False
+    case = int(input())
+    words = []
+    cnt = 0
+    # 전화번호 입력
+    for _ in range(case):
+        word = input().strip()
+        words.append(word)
+    words.sort()
+    # 판별
+    for x, y in zip(words, words[1:]):
+        if y.startswith(x):
+            cnt = 1
             break
-    if is_ok:
-        result.append('YES')
-    
-for r in result:
-    print(r)
+    if not cnt:
+        result.append("Yes")
+    else:
+        result.append("No")
+
+for res in result:
+    print(res)
