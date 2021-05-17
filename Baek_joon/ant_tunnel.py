@@ -33,4 +33,3 @@ for _ in range(N):
     info = list(input().split())
     t.insert(info[1:])
 t.travel(0, t.root)
-
