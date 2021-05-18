@@ -2,19 +2,20 @@
 import sys
 sys.setrecursionlimit(10**9)
 
+input = sys.stdin.readline
 n = int(input())
 in_order = list(map(int, input().split()))
 post_order = list(map(int, input().split()))
 
-pos = [0]*(n+1)
-for i in range(n): 
+pos = [0 for _ in range(n + 1)]
+for i in range(n):
     pos[in_order[i]] = i
 
 def pre_order(i_start, i_end, p_start, p_end):
 
     if p_start <= p_end:
         root = post_order[p_end] 
-        print(root, end = ' ')
+        print(root, end = " ")
 
         left = pos[root] - i_start
         right = i_end - pos[root]
