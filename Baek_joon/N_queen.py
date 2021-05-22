@@ -2,24 +2,25 @@
 
 N = int(input())
 
-queen = [-1] * N
-result = 0
+visited = [False] * N
+result = [0]
 
-def check_queen(col, row):
-    for i in range(row):
+def check_queen(queen, col):
+    n = len(queen)
+    for i in range(n):
         # 대각선
-        if abs(queen[i] - queen[row]) == row - i or queen[i] == queen[row]:
+        if abs(queen[i] - col) == abs(n - i):
             return True
     return False
 
-def dfs(row):
-    global result
+def dfs(queen, row):
     if row == N:
-        result += 1
+        result[0] += 1
     else:
         for col in range(N):
-            queen[row] = col
-            if not (check_queen(col, row)):
-                dfs(row + 1)
-dfs(0)
-print(result)
+            if not (check_queen(queen, col)) and not visited[col]:
+                visited[col] = True
+                dfs(queen + [col] ,row + 1)
+                visited[col] = False
+dfs([], 0)
+print(*result)
