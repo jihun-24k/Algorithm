@@ -8,6 +8,17 @@ for _ in range(T):
     t = int(input())
     test_case.append([0]+list(map(int,input().split())))
 
+def find_team(case ,visited ,start ,root , ans, result):
+    visited[root] = True
+    # 종료 조건
+    if start == case[root]:
+        result += ans
+    elif case[root] == root:
+        result += 0
+    else:
+        find_team(case ,visited ,start ,case[root] ,ans + 1, result)
+        visited[root] = False
+
 # 테스트 케이스마다 반복
 for case in test_case:
     visited = [False for _ in range(len(case))]
@@ -18,16 +29,6 @@ for case in test_case:
         # 이미 방문한 노드라면 넘어간다
         if visited[idx]:
             continue
-
-        stack = []
-        stack.append(idx)
-        before = case[idx]
-
-        while stack:
-            
-            # 다음 
-            if before == case[case[x]]:
-                stack.append(case[x])
+        find_team(case ,visited ,idx ,idx ,1, result)
 
     print(result)
-
