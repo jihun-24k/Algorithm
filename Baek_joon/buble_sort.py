@@ -3,37 +3,44 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-arr = [map(int, input().split())]
+arr = list(map(int, input().split()))
+swap = 0
 
-def merge_sort(arr):
-    def sort(high, low):
-        if high - low < 2:
-            return
-        mid = (low + high) // 2
-        sort(low, mid)
-        sort(mid, high)
-        merge(low, mid, high)
+def merge_sort(low, high):
+    global swap
+    if high - low < 2:
+        return
+    mid = (low + high) // 2
 
-    def merge(low, mid, high):
-        temp = []
-        l, h = low, mid
+    merge_sort(low, mid)
+    merge_sort(mid,high)
 
-        while l < mid and h < high:
-            if arr[l] < arr[h]:
-                temp.append(arr[l])
-                l += 1
-            else:
-                temp.append(arr[h])
-                h += 1
+    temp = []
+    l, h = low, mid
+    cnt = 0
 
-        while l < mid:
+    while l < mid and h < high:
+        if arr[l] <= arr[h]:
             temp.append(arr[l])
             l += 1
-        while h < high:
+            swap += cnt
+
+        else:
             temp.append(arr[h])
             h += 1
+            cnt += 1
 
-        for i in range(low, high):
-            arr[i] = temp[i - low]
+    while l < mid:
+        temp.append(arr[l])
+        l += 1
+        swap += cnt
 
-    return sort(0, len(arr))
+    while h < high:
+        temp.append(arr[h])
+        h += 1
+
+    for i in range(low, high):
+        arr[i] = temp[i - low]
+
+merge_sort(0, N)
+print(swap)
