@@ -1,9 +1,14 @@
 # 백준 9375번 패션왕 신해빈
-# 옷을 입을때도 있지만 그 종류의 옷을 아예 안입을 때도 있음
-# 이러한 예외를 잘 생각해야함
-# 그래서 조합으로 풀어야하나 봄
 import sys
 input = sys.stdin.readline
+
+def combination(arr, r):
+    for i in range(len(arr)):
+        if r == 1:
+            yield [arr[i]]
+        else:
+            for next in range(arr[i + 1:], r - 1):
+                yield [arr[i]] + next
 
 T = int(input())
 result = []
@@ -21,14 +26,9 @@ for _ in range(T):
         clothes.append(c[-1])
     
     set_clothes = set(clothes)
-    res = 1
+    nums = []
     for s in set_clothes:
-        res = res * clothes.count(s)
-
-    if len(set_clothes) == 1:
-        result.append(len(clothes))
-    else:
-        result.append(len(clothes) + res)
+        nums.append(clothes.count(s))
 
 for r in result:
     print(r)
