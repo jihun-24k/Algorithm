@@ -1,19 +1,20 @@
 # 백준 2206번 벽 부수고 이동하기
 from collections import deque
 n, m = map(int,input().split())
+INF = int(1e9)
 
 # 이동할 방향
 dx = [1,-1,0,0]
 dy = [0,0,-1,1]
 
-graph = [list(map(int,input())) for _ in range(n)]
-visit = [[False for _ in range(m)] for _ in range(n)]
-dist = [[0 for _ in range(m)] for _ in range(n)]
 
-def bfs (wall, x, y):
+graph = [list(map(int,input())) for _ in range(n)]
+visit = [[[INF for _ in range(m)] for _ in range(n)] for _ in range(2)]
+
+def bfs (x, y):
     queue = deque()
-    queue.append([wall,x,y])
-    visit[x][y] = True
+    queue.append([0,x,y])
+    visit[0][x][y] = 1
 
     while queue:
         b, x, y = queue.popleft()
@@ -25,24 +26,18 @@ def bfs (wall, x, y):
             if nx < 0 or nx >= n or ny < 0 or ny >= m:
                 continue
 
-            if not visit[nx][ny]:
-                visit[nx][ny] = True
-                if b == 0:
-                    if graph[nx][ny] == 1:
-                        dist[nx][ny] = dist[x][y] + 1
-                        queue.append([1, nx, ny])
+            if graph[nx][ny] == 0 and visit[b][nx][ny] == INF:
+                visit[b][nx][ny] = visit[b][x][y] + 1
+                queue.append([b, nx, ny])
 
-                    if graph[nx][ny] == 0:
-                        dist[nx][ny] = dist[x][y] + 1
-                        queue.append([0, nx, ny])
-                else:
-                    if graph[nx][ny] == 0:
-                        dist[nx][ny] = dist[x][y] + 1
-                        queue.append([1, nx, ny])
-    return(dist[n-1][m-1])
+            elif graph[nx][ny] == 1 and b == 0 and visit[1][nx][ny] == INF:
+                visit[1][nx][ny] = visit[b][x][y] + 1
+                queue.append([1, nx, ny])
 
-res = bfs(0, 0, 0)
-if res == 0:
+    return(min(visit[0][n-1][m-1],visit[1][n-1][m-1]))
+
+res = bfs(0, 0)
+if res == INF:
     print(-1)
 else:
-    print(dist[n-1][m-1] + 1)
+    print(res)
