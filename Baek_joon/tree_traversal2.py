@@ -11,7 +11,7 @@ for i in range(n):
     pos[in_order[i]] = i
 
 def pre_order(i_start, i_end, p_start, p_end):
-
+    
     if (p_start > p_end) or (i_start > i_end):
         return
 
