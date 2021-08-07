@@ -1,4 +1,7 @@
 # 백준 10775번 공항
+import sys
+sys.setrecursionlimit(int(1e6))
+input = sys.stdin.readline
 
 # union find 이론
 # 게이트 찾기
@@ -10,8 +13,10 @@ def find_gate(gates, plane):
 def union_gate(gates, a, b):
     a = find_gate(gates, a)
     b = find_gate(gates, b)
-
-    gates[a] = b
+    if a > b:
+        gates[a] = b
+    else:
+        gates[b] = a
 
 G = int(input())
 P = int(input())
