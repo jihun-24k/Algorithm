@@ -10,6 +10,7 @@ def bfs():
     global result
     q = deque()
 
+    # 빨간, 파란 구슬 위치를 큐에 넣음
     for n in range(N):
         for m in range(M):
             if board[n][m] == 'R':
@@ -19,7 +20,6 @@ def bfs():
                 q.appendleft((0, n, m, 'B'))
 
     while q:
-        # d는 걸린 분, xy는 위치, z는 물 또는 고슴도치
         d, x, y, z  = q.popleft()
 
         for i in range(4):
@@ -28,19 +28,8 @@ def bfs():
 
             if nx < 0 or nx >= N or ny < 0 or ny >= M:
                 continue
-
-            # 만약 고슴도치가 동굴을 무사히 갔으면
-            if board[nx][ny] == 'D' and z == 'S':
-                result = d + 1
-                break
+            # 만약 
             
-            if board[nx][ny] == '.':
-                if z == '*':
-                    board[nx][ny] = '*'
-                    q.append((d + 1, nx, ny , z))
-                elif not visit[nx][ny]:
-                    visit[nx][ny] = True
-                    q.append((d + 1, nx, ny, z))
         if result != 0:
             break
 
