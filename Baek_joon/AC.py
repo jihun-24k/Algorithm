@@ -1,33 +1,33 @@
 # 백준 5430번 AC (골드5)
 import sys
-from collections import deque
 
 T = int(input())
 for _ in range(T):
-    p = sys.stdin.readline().rstrip()
+    p = list(sys.stdin.readline().rstrip())
     n = int(input())
     if n == 0:
         x = []
+        if 'D' in p:
+            print('error')
+        else:
+            print("[]")
     else:
-        x = deque(sys.stdin.readline().rstrip()[1: -1].split(","))
-    is_error = False
-    is_odd = 0
+        x = list(sys.stdin.readline().rstrip()[1: -1].split(","))
+        left, right, is_odd = 0, 0, False
 
-    for func in p:
-        if func == 'R':
-            is_odd += 1
-        elif func == 'D':
-            if len(x) == 0:
-                is_error = True
-                print('error')
-                break
-            else:
-                if is_odd % 2:
-                    x.pop()
+        for func in p:
+            if func == 'R':
+                is_odd = not is_odd
+            elif func == 'D':
+                if is_odd:
+                    right +=1
                 else:
-                    x.popleft()
+                    left +=1
 
-    if is_error == False:
-        if is_odd % 2:
-            x.reverse()
-        print("[" + ",".join(x) + "]")
+        if right + left > n:
+            print('error')
+        else:
+            r = x[left: n - right]
+            if is_odd:
+                r.reverse()
+            print('[' + ','.join(r) + ']')
