@@ -1,12 +1,10 @@
 # 백준 11660번 구간 합 구하기5 (실버1)
+import sys
+input = sys.stdin.readline
 N, M = map(int, input().split())
 
-square = []
+square = [[int(x) for x in input().split()] for _ in range(N)]
 dp = [[0] * (N + 1) for _ in range(N + 1)]
-
-for _ in range(N):
-    row = list(map(int, input().split()))
-    square.append(row)
 
 for i in range(1, N+1):
     for j in range(1, N + 1):
