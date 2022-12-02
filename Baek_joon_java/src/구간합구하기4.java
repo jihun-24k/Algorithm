@@ -1,28 +1,29 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class 구간합구하기4 {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int M = sc.nextInt();
-        int[] numbers = new int[N];
-        int[] sum = new int[N];
-        for (int i = 0; i < N; i++) {
-            numbers[i] = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
+
+        int N = Integer.parseInt(stringTokenizer.nextToken());
+        int M = Integer.parseInt(stringTokenizer.nextToken());
+
+        long[] S = new long[N + 1];
+        stringTokenizer = new StringTokenizer(bufferedReader.readLine());
+
+        for (int i = 1; i <= N; i++) {
+            S[i] = S[i-1] + Integer.parseInt(stringTokenizer.nextToken());
         }
 
-        sum[0] = numbers[0];
-        for (int i = 1; i < N; i++) {
-            sum[i] = sum[i-1] + numbers[i];
-        }
-
-        int[] result = new int[M];
         for (int i = 0; i < M; i++) {
-            int from = sc.nextInt() - 1;
-            int end = sc.nextInt() - 1;
-            result[i] = sum[end] - sum[from-1];
-            System.out.println(result[i]);
+            stringTokenizer = new StringTokenizer(bufferedReader.readLine());
+            int from = Integer.parseInt(stringTokenizer.nextToken());
+            int end = Integer.parseInt(stringTokenizer.nextToken());
+            System.out.println(S[end] - S[from - 1]);
         }
     }
 }
