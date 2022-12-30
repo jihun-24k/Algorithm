@@ -17,31 +17,46 @@ public class DNA비밀번호 {
         int P = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(bf.readLine());
-        List<String> DNA = Arrays.asList(st.nextToken());
+        List<String> DNA = Arrays.asList(st.nextToken().split(""));
 
         st = new StringTokenizer(bf.readLine());
         List<String> charList = Arrays.asList("A", "C", "G", "T");
         Map<String, Integer> count = new HashMap<>();
+        Map<String, Integer> subCharList = new HashMap<>();
         for (String ch : charList) {
             count.put(ch, Integer.valueOf(st.nextToken()));
+            subCharList.put(ch, 0);
         }
 
-        for (int i = 0; i < P; ) {
-            for (int i = P; i <= S; i++) {
-                add();
-                delete();
+        for (int i = 0; i < P; i++) {
+            subCharList.put(DNA.get(i), subCharList.get(DNA.get(i)) + 1);
+        }
+
+        int head = 0;
+        int result = 0;
+        for (String str : charList) {
+            if (subCharList.get(str) < count.get(str)) {
+                break;
+            }
+            if (str.equals("T")) {
+                result++;
             }
         }
 
+        for (int i = P; i < S; i++) {
+            subCharList.put(DNA.get(i), subCharList.get(DNA.get(i)) + 1);
+            subCharList.put(DNA.get(head), subCharList.get(DNA.get(head)) - 1);
+            head++;
+            for (String str : charList) {
+                if (subCharList.get(str) < count.get(str)) {
+                    break;
+                }
+                if (str.equals("T")) {
+                    result++;
+                }
+            }
+        }
+        System.out.println(result);
+        bf.close();
     }
-
-    public static void add() {
-
-    }
-
-    public static void delete() {
-
-    }
-
-
 }
