@@ -1,3 +1,5 @@
+package 자료구조;
+
 import java.util.Scanner;
 
 public class 수들의합5 {

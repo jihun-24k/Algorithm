@@ -1,11 +1,14 @@
+package 자료구조;
+
 import java.util.Scanner;
 
 public class 평균구하기 {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
         int[] numbers = new int[N];
-        for (int i = 0; i<N; i++) {
+        for (int i = 0; i < N; i++) {
             numbers[i] = sc.nextInt();
         }
         long sum = 0;

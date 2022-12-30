@@ -1,3 +1,5 @@
+package 자료구조;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,7 +18,7 @@ public class 구간합구하기4 {
         stringTokenizer = new StringTokenizer(bufferedReader.readLine());
 
         for (int i = 1; i <= N; i++) {
-            S[i] = S[i-1] + Integer.parseInt(stringTokenizer.nextToken());
+            S[i] = S[i - 1] + Integer.parseInt(stringTokenizer.nextToken());
         }
 
         for (int i = 0; i < M; i++) {
