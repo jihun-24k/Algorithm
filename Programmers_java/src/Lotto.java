@@ -6,11 +6,15 @@ class Lotto {
         int index = 1;
 
         for (int[] lotto : lotteries){
-            double percent = (double) lotto[0] / (double) (lotto[1] + 1);
+            double percent = lotto[0] / (double) (lotto[1] + 1);
+            if (percent >= 1.0) {
+                percent = 1.0;
+            }
             if (maxPercent == percent) {
                 if (value < lotto[2]){
                     result = index;
                     value = lotto[2];
+                    maxPercent = percent;
                 }
             }
             if (maxPercent < percent) {
