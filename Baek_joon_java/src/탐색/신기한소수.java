@@ -1,4 +1,4 @@
-package 자료구조;
+package 탐색;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,14 +28,16 @@ public class 신기한소수 {
 
     private static void dfs(int n, int digit) {
         if (digit == N) {
-            if (isPrime(n))
+            if (isPrime(n)) {
                 result.add(n);
+            }
             return;
         }
 
         for (int i = 0; i < 10; i++) {
-            if (i % 2 == 0)
+            if (i % 2 == 0) {
                 continue;
+            }
             if (isPrime(n * 10 + i)) {
                 dfs(n * 10 + i, digit + 1);
             }
