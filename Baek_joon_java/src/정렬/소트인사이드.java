@@ -1,4 +1,4 @@
-package 자료구조;
+package 정렬;
 
 import java.util.Arrays;
 import java.util.Scanner;
