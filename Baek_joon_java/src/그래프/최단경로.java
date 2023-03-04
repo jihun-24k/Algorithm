@@ -58,14 +58,14 @@ public class 최단경로 {
         queue.add(new Edge(k, 0));
         while (!queue.isEmpty()) {
             Edge now = queue.poll();
-            int start = now.next;
+            int start = now.vertex;
             if (visited[start]) {
                 continue;
             }
             visited[start] = true;
 
             for (Edge e : arr[start]) {
-                int next = e.next;
+                int next = e.vertex;
                 int nextValue = e.value;
 
                 if (distance[next] > distance[start] + nextValue) {
@@ -79,11 +79,11 @@ public class 최단경로 {
 
 class Edge implements Comparable<Edge> {
 
-    int next;
+    int vertex;
     int value;
 
-    Edge(int next, int value) {
-        this.next = next;
+    Edge(int vertex, int value) {
+        this.vertex = vertex;
         this.value = value;
     }
 
