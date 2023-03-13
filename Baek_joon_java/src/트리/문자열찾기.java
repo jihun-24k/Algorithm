@@ -1,3 +1,5 @@
+package 트리;
+
 import java.util.Scanner;
 
 public class 문자열찾기 {
