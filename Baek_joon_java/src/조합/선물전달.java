@@ -1,3 +1,5 @@
+package 조합;
+
 import java.util.Scanner;
 
 public class 선물전달 {

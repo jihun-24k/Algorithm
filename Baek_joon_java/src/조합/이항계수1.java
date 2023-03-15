@@ -1,3 +1,5 @@
+package 조합;
+
 import java.util.Scanner;
 
 public class 이항계수1 {
