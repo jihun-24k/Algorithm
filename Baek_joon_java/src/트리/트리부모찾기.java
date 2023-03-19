@@ -1,3 +1,5 @@
+package 트리;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
