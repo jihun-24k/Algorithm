@@ -1,3 +1,5 @@
+package 동적계획법;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

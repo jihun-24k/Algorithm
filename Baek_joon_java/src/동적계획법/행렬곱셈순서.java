@@ -1,3 +1,5 @@
+package 동적계획법;
+
 import java.util.Scanner;
 
 public class 행렬곱셈순서 {
