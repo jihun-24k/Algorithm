@@ -1,3 +1,5 @@
+package 기하학;
+
 import java.util.Scanner;
 
 public class 선분방향구하기 {
