@@ -33,21 +33,15 @@ public class DDR {
             int nextStep = Integer.parseInt(input[i - 1]);
 
             for (int l = 0; l < 5; l++) {
-                if (nextStep == l) {
-                    continue;
-                }
                 for (int r = 0; r < 5; r++) {
-                    dp[i][l][nextStep] = Math.min(dp[i - 1][l][r] + strength[r][nextStep],
-                        dp[i][l][nextStep]);
-                }
-            }
-            for (int r = 0; r < 5; r++) {
-                if (nextStep == r) {
-                    continue;
-                }
-                for (int l = 0; l < 5; l++) {
-                    dp[i][nextStep][r] = Math.min(dp[i - 1][l][r] + strength[l][nextStep],
-                        dp[i][nextStep][r]);
+                    if (nextStep != l) {
+                        dp[i][l][nextStep] = Math.min(dp[i - 1][l][r] + strength[r][nextStep],
+                            dp[i][l][nextStep]);
+                    }
+                    if (nextStep != r) {
+                        dp[i][nextStep][r] = Math.min(dp[i - 1][l][r] + strength[l][nextStep],
+                            dp[i][nextStep][r]);
+                    }
                 }
             }
         }
