@@ -1,3 +1,5 @@
+package level3;
+
 public class p와y개수 {
     boolean solution(String s) {
         int p = 0;

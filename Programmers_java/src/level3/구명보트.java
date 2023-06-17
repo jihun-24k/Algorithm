@@ -1,3 +1,5 @@
+package level3;
+
 import java.util.Arrays;
 
 class 구명보트 {
@@ -14,7 +16,7 @@ class 구명보트 {
                 left++; // 왼쪽 인덱스 증가
             }
             right--; // 오른쪽 인덱스 감소
-            answer++; // 구명보트 수 증가
+            answer++; // level3.구명보트 수 증가
         }
 
         return answer;

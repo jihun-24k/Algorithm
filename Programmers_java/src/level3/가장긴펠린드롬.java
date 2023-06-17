@@ -1,3 +1,5 @@
+package level3;
+
 class 가장긴펠린드롬 {
     static int strLen;
     static char[] str;
