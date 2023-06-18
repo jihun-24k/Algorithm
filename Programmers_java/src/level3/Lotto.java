@@ -1,3 +1,5 @@
+package level3;
+
 class Lotto {
     public static int solution(int[][] lotteries) {
         double maxPercent = 0.0;
