@@ -1,3 +1,4 @@
+package level3;
 
 public class 기지국설치 {
     public int solution(int n, int[] stations, int w) {
