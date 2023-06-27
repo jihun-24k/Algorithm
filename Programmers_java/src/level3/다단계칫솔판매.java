@@ -1,3 +1,5 @@
+package level3;
+
 import java.util.HashMap;
 
 public class 다단계칫솔판매 {
