@@ -1,3 +1,5 @@
+package level2;
+
 class 다음큰수 {
     public int solution(int n) {
         int ones = countOne(convertBinary(n));
