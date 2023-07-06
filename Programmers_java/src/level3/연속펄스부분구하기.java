@@ -1,3 +1,5 @@
+package level3;
+
 public class 연속펄스부분구하기 {
 
     public static void main(String[] args) {
